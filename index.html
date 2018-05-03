@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#gonder").click(function(){
+                    $('.donenVeri').html('');
+                    var sehirBilgisi = $("#sehirGir").val();
+                    var apiCagir='http://api.openweathermap.org/data/2.5/weather?q='+sehirBilgisi+',tr&appid=98edf730e6fee3c4b68fe3912bde48db&units=metric';
+                
+                $.getJSON(apiCagir, gelenHava);
+                
+                function gelenHava(gelenBilgi){
+                var sehirAdi=gelenBilgi.name;
+                var aciklama=gelenBilgi.main.temp;
+                $('.donenVeri').append(gelenBilgi.name + " şehrindeki hava durumu: " + aciklama + " derece.");
+                }
+    }); 
+});
+         
+        </script>
+    </head>
+    
+    <body>
+        <input type="text" id="sehirGir" name="sehirGir"/>
+        <input type="button" id="gonder" name="gonder" value="gönder gelsin" />
+        
+        <div class="donenVeri">
+
+        </div>
+        
+    </body>
+</html>
